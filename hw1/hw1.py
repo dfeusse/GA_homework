@@ -18,8 +18,11 @@ iris_X_train, iris_X_test, iris_Y_train, iris_Y_test = cross_validation.train_te
 #print iris_X_train.shape, iris_Y_train.shape
 #print iris_X_test.shape, iris_Y_test.shape
 
-clf = svm.SVC(kernel="linear", C=1).fit(iris_X_train, iris_Y_train)
-print clf.score(iris_X_test, iris_Y_test)
+clf = svm.SVC(kernel="linear", C=1)
+scores = cross_validation.cross_val_score(clf, iris.data, iris.target, cv=5)
+print scores
+print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+#print clf.score(iris_X_test, iris_Y_test)
 
 print '-------'
 
